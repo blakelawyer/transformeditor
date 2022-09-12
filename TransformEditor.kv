@@ -1,0 +1,101 @@
+TransformEditorGrid:
+
+<TransformEditorGrid>:
+    id: app
+
+    # Color the background black.
+    canvas.before:
+        Color:
+            rgba: 0, 0, 0, 0
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    # Left and right side of the sceen get a column.
+    rows: 1
+    cols: 2
+
+    # Left side of the screen.
+    GridLayout:
+        id: image_panel
+        size_hint: .75, 1
+
+        # Consists of the image, the file chooser, and the matrix operations.
+        rows: 3
+        cols: 1
+        # Image and file chooser sides will cycle between 0 and 1 depending on what's selected.
+
+        # The image to be displayed. Initialized with a black image to match the background.
+        Image:
+            id: my_image
+            size_hint: 1, 1
+            source: "C:/Users/Blake Lawyer/Desktop/Python/ComputerVision/images/black.png"
+            texture:
+
+        # FileChooser which calls Python function upon selection.
+        FileChooserIconView:
+            id: filechooser
+            size_hint: 0, 0
+            path: "C:/Users/Blake Lawyer/Desktop/Python/ComputerVision/images"
+            on_selection: app.selected(filechooser.selection)
+
+        # The matrix operations display.
+        GridLayout:
+            id: matrix
+            size_hint: .50, .25
+            rows: 1
+            cols: 1
+            # Matrix operations panel.
+
+            Label:
+                id: matrix_2
+                size_hint: 1, 1
+                text: "MATRIX OPERATIONS PANEL"
+                font_size: 30
+                #on_press: root.matrix_operations()
+
+    # Buttons Column on Right Side of Screen
+    ScrollView:
+        size_hint: .25, 1
+
+        # Buttons in a scrollable stack.
+        StackLayout:
+            size_hint: 1, 1
+            height: self.minimum_height
+
+            # Import Image
+            Button:
+                size_hint: 1, .25
+                text: "Import Image"
+                font_size: 20
+                halign: 'center'
+                bold: True
+                on_press: root.import_image()
+
+            # Clear Canvas
+            Button:
+                size_hint: 1, .25
+                text: "Clear Canvas"
+                font_size: 20
+                halign: 'center'
+                bold: True
+                on_press: root.clear_canvas()
+
+            # Rotate Image
+            Button:
+                size_hint: 1, .25
+                text: "Rotate\nImage"
+                font_size: 20
+                halign: 'center'
+                bold: True
+                on_press: root.rotate_image()
+
+            # Spin the Wheel!
+            Button:
+                size_hint: 1, .25
+                text: "Spin the\nWheel"
+                font_size: 20
+                halign: 'center'
+                bold: True
+                on_press: root.spin_wheel()
+
